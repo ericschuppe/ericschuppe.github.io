@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eric R. Schuppe — Neuroscience of animal communication</title>
+<meta name="description" content="Eric R. Schuppe, assistant professor of neuroscience at Claremont McKenna College. Neural and genetic mechanisms of social communication in songbirds.">
+<meta property="og:title" content="Eric R. Schuppe">
+<meta property="og:description" content="Neural and genetic mechanisms of social communication in songbirds.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#DCE9F4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Blue throughout: paper, ink, and data all sit on one hue family */
+  --page:#DCE9F4;
+  --surface:#F1F7FC;
+  --ink:#16293D;
+  --deep:#255B87;
+  --mid:#3E85B8;
+  --accent:#1E9AD6;
+  --muted:#5E7C95;
+  --rule:#B3CCE0;
+  --rule-soft:#CBDDEB;
+
+  --display:"Newsreader", Georgia, serif;
+  --body:"Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  --wrap:1080px;
+  --gap:clamp(2.5rem, 6vw, 5rem);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--page);
+  color:var(--ink);
+  font-family:var(--body);
+  font-weight:350;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--deep);text-decoration:none;border-bottom:1px solid var(--rule);transition:border-color .18s,color .18s}
+a:hover{color:var(--accent);border-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 1.1rem;
+}
+
+/* ---------- header ---------- */
+.skip{position:absolute;left:-9999px;top:0;background:var(--deep);color:#fff;padding:.7rem 1rem;z-index:50;border:0}
+.skip:focus{left:.5rem;top:.5rem}
+
+.masthead{
+  position:sticky;top:0;z-index:20;
+  background:rgba(220,233,244,.93);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.masthead .wrap{display:flex;align-items:center;gap:1.5rem;min-height:62px}
+.wordmark{
+  font-family:var(--display);font-size:1.12rem;font-weight:500;
+  letter-spacing:.01em;border:0;color:var(--ink);white-space:nowrap;
+}
+.wordmark:hover{color:var(--accent)}
+.wordmark span{color:var(--muted);font-style:italic;font-weight:300}
+nav{margin-left:auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0}
+nav a{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);border:0;padding:.4rem 0;white-space:nowrap;position:relative;
+}
+nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:.1rem;height:1px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .2s;
+}
+nav a:hover{color:var(--ink)}
+nav a:hover::after,nav a[aria-current="page"]::after{transform:scaleX(1)}
+nav a[aria-current="page"]{color:var(--ink)}
+@media(max-width:640px){
+  .masthead .wrap{flex-wrap:wrap;gap:0;padding-top:.7rem;padding-bottom:.2rem}
+  .wordmark{width:100%}
+  nav{margin-left:-.1rem;width:100%}
+  nav ul{gap:1.1rem;padding-bottom:.55rem}
+}
+
+/* ---------- divider ---------- */
+.axis{
+  height:11px;
+  border-top:1px solid var(--rule);
+  background-image:linear-gradient(to right,var(--rule) 1px,transparent 1px);
+  background-size:22px 5px;background-repeat:repeat-x;
+  margin:2.6rem 0;
+}
+
+/* ---------- panels ---------- */
+.panel{display:none;animation:rise .45s ease both}
+.panel.is-active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.panel > .wrap{padding-top:clamp(2.5rem,6vw,4.5rem);padding-bottom:clamp(3rem,8vw,6rem)}
+.panel > .wrap + .wrap{padding-top:0}
+
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.012em;margin:0}
+h1{font-size:clamp(2.7rem,7.5vw,5rem);line-height:.98}
+h2{font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.12;margin-bottom:.9rem}
+h3{font-size:1.22rem;line-height:1.3}
+p{margin:0 0 1.05rem}
+.lead{
+  font-family:var(--display);font-size:clamp(1.2rem,2.3vw,1.55rem);
+  line-height:1.45;font-weight:300;color:var(--deep);max-width:34ch;
+}
+.prose{max-width:66ch}
+.prose p{color:#284054}
+
+/* ---------- hero ---------- */
+.hero h1{margin-bottom:1.4rem}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:820px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:end}}
+.hero-note{font-size:.95rem;color:var(--muted);max-width:42ch}
+
+/* ---------- figure: three panels ---------- */
+.figure{margin-top:clamp(2.2rem,5vw,3.4rem)}
+.plates{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+@media(min-width:760px){.plates{grid-template-columns:1fr 1.25fr 1fr}}
+.plate{background:var(--surface);padding:1rem 1rem .85rem}
+.plate svg{display:block;width:100%;height:auto}
+.plate-label{
+  display:flex;align-items:baseline;gap:.5rem;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.7rem;
+}
+.plate-label b{color:var(--accent);font-weight:500}
+
+/* svg primitives */
+.silhouette{fill:#C3DAEB}
+.perch{fill:#B3CCE0}
+.leg{stroke:#9FBFD8;stroke-width:3.5;fill:none;stroke-linecap:round}
+.bone{stroke:var(--deep);stroke-width:1.6;fill:none;stroke-linecap:round}
+.node{fill:var(--surface);stroke:var(--accent);stroke-width:1.8}
+.node-core{fill:var(--accent)}
+.nuc-label{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;fill:var(--deep);letter-spacing:.02em}
+.axis-label{font-family:"IBM Plex Mono",monospace;font-size:8px;fill:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.path-motor{stroke:var(--deep);stroke-width:1.9;fill:none}
+.path-motor-head{fill:var(--deep)}
+.path-afp{stroke:var(--mid);stroke-width:1.5;fill:none;stroke-dasharray:3.5 3}
+.path-afp-head{fill:var(--mid)}
+.path-shell{stroke:#5FA8D3;stroke-width:1.7;fill:none}
+.path-shell-head{fill:#5FA8D3}
+.path-trans{stroke:#9AC8E4;stroke-width:1.4;fill:none;stroke-dasharray:1 2.6}
+.path-trans-head{fill:#9AC8E4}
+.lman-shell{fill:none;stroke:#A7D8F0;stroke-width:7}
+.leader{stroke:var(--rule);stroke-width:.8}
+.nuc-sub text{font-family:"IBM Plex Mono",monospace;font-size:8px;fill:var(--muted);letter-spacing:.02em}
+.cell{stroke:var(--surface);stroke-width:1}
+.hub-box{fill:none;stroke:var(--accent);stroke-width:1.4}
+
+/* figure motion, one-shot on load */
+@keyframes pop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+@keyframes drawline{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.node,.node-core{transform-box:fill-box;transform-origin:center;animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+.bone{--len:120;stroke-dasharray:var(--len);animation:drawline .8s ease both}
+.path-motor,.path-afp,.path-shell,.path-trans,
+.path-motor-head,.path-afp-head,.path-shell-head,.path-trans-head{animation:fadein .7s ease both}
+.lman-shell{transform-box:fill-box;transform-origin:center;animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+.nuc-sub text,.leader{animation:fadein .7s ease both;animation-delay:1.1s}
+.nuc-label text{animation:fadein .7s ease both;animation-delay:.9s}
+.cell{animation:fadein .5s ease both}
+
+/* ---------- news ---------- */
+.news-head{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.2rem}
+.news-head .eyebrow{margin:0}
+.news-nav{margin-left:auto;display:flex;align-items:center;gap:.45rem}
+.news-range{
+  font-family:var(--mono);font-size:.67rem;letter-spacing:.1em;
+  color:var(--muted);margin:0 .35rem 0 0;font-variant-numeric:tabular-nums;
+}
+.news-btn{
+  width:2rem;height:2rem;flex:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:transparent;border:1px solid var(--rule);border-radius:0;
+  color:var(--deep);cursor:pointer;padding:0;transition:.18s;
+}
+.news-btn svg{width:.72rem;height:.72rem;display:block}
+.news-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.news-btn:disabled{opacity:.3;cursor:default}
+
+.news-list{list-style:none;margin:0;padding:0}
+.news-item{
+  display:grid;gap:.2rem 2rem;padding:1.15rem 0;
+  border-top:1px solid var(--rule-soft);
+  animation:fadein .35s ease both;
+}
+.news-item:first-child{border-top:1px solid var(--rule)}
+.news-item:last-child{border-bottom:1px solid var(--rule-soft)}
+@media(min-width:700px){.news-item{grid-template-columns:9.5rem 1fr}}
+.news-date{
+  font-family:var(--mono);font-size:.69rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--accent);margin:0;padding-top:.28rem;white-space:nowrap;
+}
+.news-text{margin:0;font-size:.97rem;color:#284054;line-height:1.6}
+.news-more{margin:.35rem 0 0}
+.news-more a{font-family:var(--mono);font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;border-bottom-color:var(--rule)}
+
+/* ---------- research ---------- */
+.threads{display:grid;gap:0}
+.thread{display:grid;gap:.6rem 2.5rem;padding:2.2rem 0;border-bottom:1px solid var(--rule)}
+.thread:first-child{border-top:1px solid var(--rule)}
+@media(min-width:820px){.thread{grid-template-columns:15rem 1fr;align-items:start}}
+.thread .tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.thread h3{margin:.35rem 0 .1rem}
+.thread .system{font-family:var(--display);font-style:italic;font-size:1rem;color:var(--muted);margin-top:.2rem}
+.thread p{margin:0;color:#284054}
+
+.methods{list-style:none;padding:0;margin:1.4rem 0 0;display:grid;gap:.55rem}
+@media(min-width:700px){.methods{grid-template-columns:repeat(2,1fr);gap:.55rem 2.5rem}}
+.methods li{font-size:.95rem;padding-left:1.5rem;position:relative;color:#284054}
+.methods li::before{content:"";position:absolute;left:0;top:.72em;width:.7rem;height:1px;background:var(--accent)}
+
+/* ---------- people ---------- */
+.roster{list-style:none;margin:0;padding:0}
+.person{
+  display:grid;gap:.15rem 2rem;align-items:baseline;
+  padding:1.05rem 0;border-top:1px solid var(--rule-soft);
+}
+.person:first-child{border-top:1px solid var(--rule)}
+.person:last-child{border-bottom:1px solid var(--rule-soft)}
+@media(min-width:600px){.person{grid-template-columns:1fr auto}}
+.person-name{font-family:var(--display);font-size:1.12rem;margin:0}
+.person-role{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--accent);margin:0;
+}
+.person-name a{border-bottom-color:var(--rule)}
+
+.join{border:1px solid var(--deep);padding:clamp(1.4rem,3vw,2.2rem);margin-top:var(--gap);background:var(--surface)}
+.join h3{margin-bottom:.6rem}
+.join p{max-width:62ch;font-size:.98rem}
+.join p:last-child{margin-bottom:0}
+
+
+/* ---------- publications ---------- */
+.year-group{display:grid;gap:.4rem 2rem;padding:1.6rem 0;border-top:1px solid var(--rule)}
+@media(min-width:760px){.year-group{grid-template-columns:6rem 1fr}}
+.year{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.06em;padding-top:.35rem}
+.pub-list{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem}
+.pub{font-size:.96rem;line-height:1.55;color:#284054}
+.pub b{font-weight:600;color:var(--ink)}
+.pub i{font-style:italic;color:var(--muted)}
+
+/* ---------- cv ---------- */
+.btn{
+  display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+  background:var(--deep);color:#fff;padding:.85rem 1.5rem;border:1px solid var(--deep);
+}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.stages{display:grid;gap:0;margin-top:1.6rem}
+.cv-section{margin-top:var(--gap)}
+.cv-section:first-child{margin-top:0}
+.cv-section > h3{
+  font-size:1.35rem;padding-bottom:.55rem;
+  border-bottom:2px solid var(--deep);
+}
+.cv-group{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin:1.7rem 0 0;padding-bottom:.5rem;border-bottom:1px solid var(--rule);
+}
+.cv-group:first-child{margin-top:1.2rem}
+.stage{display:grid;gap:.3rem 2.5rem;padding:1.15rem 0;border-top:1px solid var(--rule-soft)}
+.cv-group + .stage{border-top:0}
+@media(min-width:760px){.stage{grid-template-columns:11rem 1fr}}
+.stage .when{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--muted);padding-top:.2rem;white-space:nowrap}
+.stage b{font-weight:500}
+.stage span{display:block;color:var(--muted);font-size:.95rem}
+.stage .advisor{font-size:.88rem;color:var(--muted);margin-top:.15rem}
+.stage .advisor i{font-style:italic}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;gap:2.5rem}
+@media(min-width:760px){.contact-grid{grid-template-columns:1fr 1fr;gap:4rem}}
+.dl{margin:0}
+.dl dt{font-family:var(--mono);font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:1.4rem}
+.dl dt:first-child{margin-top:0}
+.dl dd{margin:.3rem 0 0;font-size:1.02rem}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--rule);background:var(--surface)}
+footer .wrap{
+  display:flex;flex-wrap:wrap;gap:.6rem 2rem;padding-top:1.6rem;padding-bottom:1.6rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--muted);
+}
+footer a{border:0;color:var(--muted)}
+footer a:hover{color:var(--accent)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .bone{stroke-dasharray:none !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="#/">Eric R. Schuppe <span>lab</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/research">Research</a></li>
+        <li><a href="#/people">People</a></li>
+        <li><a href="#/publications">Publications</a></li>
+        <li><a href="#/cv">CV</a></li>
+        <li><a href="#/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<section class="panel" id="home" aria-labelledby="home-h">
+  <div class="wrap hero">
+    <p class="eyebrow">Kravis Department of Integrated Sciences &nbsp;/&nbsp; Claremont McKenna College</p>
+    <div class="hero-grid">
+      <div><h1 id="home-h">Schuppe lab<br>@ CMC</h1></div>
+      <div>
+        <p class="lead">Nearly every social interaction we have runs on communication, and small differences in how we do it change the outcome.</p>
+        <p class="hero-note">Using songbirds, my lab studies where those differences come from and what they can tell us about the neural and genetic factors that disrupt communication in humans.</p>
+      </div>
+    </div>
+
+    <div class="figure">
+      <div class="plates">
+
+        <!-- A. markerless pose tracking -->
+        <div class="plate">
+          <p class="plate-label"><b>A</b> Behavioral tracking</p>
+          <svg viewBox="0 0 320 220" role="img" aria-label="Diagram of a finch with tracked body keypoints connected into a skeleton">
+            <rect class="perch" x="18" y="192" width="284" height="5" rx="2.5"/>
+
+            <g class="silhouette">
+              <ellipse cx="165" cy="112" rx="72" ry="44" transform="rotate(-18 165 112)"/>
+              <circle cx="238" cy="72" r="25"/>
+              <polygon points="135,133 45,170 58,188 122,152"/>
+              <polygon points="259,67 292,79 259,88"/>
+            </g>
+            <path class="leg" d="M178 150 L 182 192 M 168 192 L 200 192"/>
+
+            <path class="bone" style="--len:60;animation-delay:.15s" d="M288 79 L 233 60"/>
+            <path class="bone" style="--len:30;animation-delay:.25s" d="M233 60 L 213 72"/>
+            <path class="bone" style="--len:55;animation-delay:.35s" d="M213 72 L 162 79"/>
+            <path class="bone" style="--len:75;animation-delay:.45s" d="M162 79 L 128 142"/>
+            <path class="bone" style="--len:90;animation-delay:.55s" d="M128 142 L 50 178"/>
+            <path class="bone" style="--len:120;animation-delay:.55s" d="M162 79 L 180 191"/>
+
+            <g>
+              <circle class="node" cx="288" cy="79"  r="4.6" style="animation-delay:.50s"/>
+              <circle class="node" cx="233" cy="60"  r="5.4" style="animation-delay:.58s"/>
+              <circle class="node" cx="213" cy="72"  r="4.6" style="animation-delay:.66s"/>
+              <circle class="node" cx="162" cy="79"  r="5.4" style="animation-delay:.74s"/>
+              <circle class="node" cx="128" cy="142" r="4.6" style="animation-delay:.82s"/>
+              <circle class="node" cx="50"  cy="178" r="4.6" style="animation-delay:.90s"/>
+              <circle class="node" cx="180" cy="191" r="4.6" style="animation-delay:.98s"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- B. song system expression -->
+        <div class="plate">
+          <p class="plate-label"><b>B</b> Systems neuroscience</p>
+          <svg viewBox="0 0 400 220" role="img" aria-label="Circuit schematic of songbird forebrain pathways for vocal and non-vocal communication, showing LMAN core and shell, their separate targets RA and AId, and the multimodal integrators dNCL and Av">
+            <g class="edges">
+              <path class="path-motor" style="animation-delay:0.50s" d="M225.6 56.9 L253.1 87.9"/>
+              <polygon class="path-motor-head" style="animation-delay:0.50s" points="253.1,87.9 245.2,84.1 250.3,79.6"/>
+              <path class="path-motor" style="animation-delay:0.56s" d="M253.5 107.2 Q214.0 150.0 158.5 189.9"/>
+              <polygon class="path-motor-head" style="animation-delay:0.56s" points="158.5,189.9 163.0,182.4 167.0,188.0"/>
+              <path class="path-afp" style="animation-delay:0.72s" d="M202.8 51.9 Q140.0 80.0 74.7 157.7"/>
+              <polygon class="path-afp-head" style="animation-delay:0.72s" points="74.7,157.7 77.2,149.4 82.4,153.7"/>
+              <path class="path-afp" style="animation-delay:0.78s" d="M76.8 174.3 Q104.0 190.0 139.6 194.6"/>
+              <polygon class="path-afp-head" style="animation-delay:0.78s" points="139.6,194.6 131.2,197.0 132.1,190.2"/>
+              <path class="path-afp" style="animation-delay:0.84s" d="M133.5 183.8 Q88.0 150.0 81.4 109.2"/>
+              <polygon class="path-afp-head" style="animation-delay:0.84s" points="81.4,109.2 86.1,116.6 79.3,117.7"/>
+              <path class="path-afp" style="animation-delay:0.90s" d="M88.0 84.9 Q170.0 60.0 249.5 92.8"/>
+              <polygon class="path-afp-head" style="animation-delay:0.90s" points="249.5,92.8 240.8,92.9 243.4,86.6"/>
+              <path class="path-shell" style="animation-delay:0.94s" d="M98.3 85.2 L325.6 53.7"/>
+              <polygon class="path-shell-head" style="animation-delay:0.94s" points="325.6,53.7 318.2,58.2 317.2,51.4"/>
+              <path class="path-shell" style="animation-delay:1.00s" d="M97.9 92.9 Q200.0 118.0 323.6 130.7"/>
+              <polygon class="path-shell-head" style="animation-delay:1.00s" points="323.6,130.7 315.3,133.3 316.0,126.5"/>
+              <path class="path-shell" style="animation-delay:1.06s" d="M94.6 100.0 Q150.0 140.0 226.7 155.7"/>
+              <polygon class="path-shell-head" style="animation-delay:1.06s" points="226.7,155.7 218.2,157.4 219.6,150.8"/>
+              <path class="path-shell" style="animation-delay:1.12s" d="M337.7 63.5 L336.3 119.5"/>
+              <polygon class="path-shell-head" style="animation-delay:1.12s" points="336.3,119.5 333.1,111.4 339.9,111.6"/>
+              <path class="path-shell" style="animation-delay:1.18s" d="M331.7 61.6 Q300.0 110.0 247.1 151.0"/>
+              <polygon class="path-shell-head" style="animation-delay:1.18s" points="247.1,151.0 251.3,143.4 255.5,148.8"/>
+              <path class="path-shell" style="animation-delay:1.24s" d="M327.2 139.4 Q250.0 205.0 160.5 196.9"/>
+              <polygon class="path-shell-head" style="animation-delay:1.24s" points="160.5,196.9 168.7,194.3 168.1,201.0"/>
+              <path class="path-trans" style="animation-delay:1.20s" d="M88.5 88.2 Q190.0 90.0 324.0 128.5"/>
+              <polygon class="path-trans-head" style="animation-delay:1.20s" points="324.0,128.5 315.4,129.6 317.2,123.1"/>
+              <path class="path-shell" style="animation-delay:1.20s" d="M247.7 162.0 L292.0 180.0"/>
+              <polygon class="path-shell-head" style="animation-delay:1.20s" points="292.0,180.0 283.3,180.1 285.9,173.8"/>
+            </g>
+            <g class="nuclei">
+              <circle class="lman-shell" cx="78" cy="88" r="14.5" style="animation-delay:0.10s"/>
+              <circle class="node-core" cx="78" cy="88" r="8" fill="#3E85B8" style="animation-delay:0.16s"/>
+              <circle class="node-core" cx="66" cy="168" r="10" fill="#5FB6E0" style="animation-delay:0.15s"/>
+              <circle class="node-core" cx="150" cy="196" r="7" fill="#A7D8F0" style="animation-delay:0.20s"/>
+              <circle class="node-core" cx="216" cy="46" r="12" fill="#12628F" style="animation-delay:0.25s"/>
+              <circle class="node-core" cx="338" cy="52" r="9" fill="#5FB6E0" style="animation-delay:0.30s"/>
+              <circle class="node-core" cx="262" cy="98" r="10" fill="#2E9BD6" style="animation-delay:0.35s"/>
+              <circle class="node-core" cx="336" cy="132" r="9" fill="#2E9BD6" style="animation-delay:0.40s"/>
+              <circle class="node-core" cx="238" cy="158" r="8" fill="#8CCBEA" style="animation-delay:0.45s"/>
+            </g>
+            <g class="nuc-label">
+              <text x="78" y="50" text-anchor="middle">LMAN</text>
+              <text x="66" y="191" text-anchor="middle">Area X</text>
+              <text x="128" y="206" text-anchor="end">DLM</text>
+              <text x="216" y="26" text-anchor="middle">HVC</text>
+              <text x="338" y="32" text-anchor="middle">dNCL</text>
+              <text x="276" y="101">RA</text>
+              <text x="350" y="135">AId</text>
+              <text x="238" y="180" text-anchor="middle">Av</text>
+            </g>
+            <g class="nuc-sub">
+              <line class="leader" x1="36" y1="69" x2="63" y2="77"/>
+              <line class="leader" x1="36" y1="113" x2="71" y2="94"/>
+              <text x="34" y="72" text-anchor="end">shell</text>
+              <text x="34" y="116" text-anchor="end">core</text>
+              <text x="302" y="188">contralateral</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- C. co-expression module -->
+        <div class="plate">
+          <p class="plate-label"><b>C</b> Gene expression</p>
+          <svg viewBox="0 0 320 220" role="img" aria-label="Heatmap of a gene co-expression module across individual birds, with one hub gene highlighted">
+            <g id="heatcells"></g>
+            <g id="heatframe"></g>
+            <text class="axis-label" x="165" y="200" text-anchor="middle">individuals</text>
+            <text class="axis-label" x="18" y="102" text-anchor="middle" transform="rotate(-90 18 102)">module genes</text>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="axis"></div>
+    <div class="news-head">
+      <p class="eyebrow">Lab news</p>
+      <div class="news-nav">
+        <p class="news-range" id="news-range"></p>
+        <button class="news-btn" id="news-prev" type="button" aria-label="Newer entries" aria-controls="news">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 L4 8 L10 14"/></svg>
+        </button>
+        <button class="news-btn" id="news-next" type="button" aria-label="Older entries" aria-controls="news">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 L12 8 L6 14"/></svg>
+        </button>
+      </div>
+    </div>
+    <ol class="news-list" id="news" aria-live="polite"></ol>
+  </div>
+</section>
+
+<!-- ============ RESEARCH ============ -->
+<section class="panel" id="research" aria-labelledby="research-h">
+  <div class="wrap">
+    <p class="eyebrow">Research</p>
+    <h2 id="research-h">The neurogenetics of<br>social communication.</h2>
+    <div class="prose">
+      <p>While communication is essential for survival and reproduction, it often varies dramatically across scales. Across species, whole behavioral strategies diverge over evolutionary time, in some cases producing the most elaborate displays in the natural world. Even within a single species, individuals differ more than you would assume: two Bengalese finches raised in the same colony can differ twofold in how often they call or sing. We often treat those as separate questions, but we are increasingly interested in whether behavioral diversity at both scales is driven by similar mechanisms. Our approach is interdisciplinary, centered on mapping and manipulating gene expression in the specialized brain regions that control song, which songbirds uniquely let us study from behavior all the way down to the gene.</p>
+    </div>
+    <div class="axis"></div>
+    <div class="threads" id="threads"></div>
+    <h3 style="margin-top:var(--gap)">How we work</h3>
+    <ul class="methods" id="methods"></ul>
+  </div>
+</section>
+
+<!-- ============ PEOPLE ============ -->
+<section class="panel" id="people" aria-labelledby="people-h">
+  <div class="wrap">
+    <p class="eyebrow">People</p>
+    <h2 id="people-h">The lab</h2>
+    <div class="axis"></div>
+    <ul class="roster" id="roster"></ul>
+
+    <div class="join">
+      <h3>Joining the lab</h3>
+      <p><b>CMC and Claremont Colleges undergraduates:</b> email me with a short note about what you are curious about and any coursework or skills you want to build on. No prior lab experience is required. Interest in animal behavior, coding, or genomics all count.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ PUBLICATIONS ============ -->
+<section class="panel" id="publications" aria-labelledby="pubs-h">
+  <div class="wrap">
+    <p class="eyebrow">Publications</p>
+    <h2 id="pubs-h">Papers</h2>
+    <p class="prose">Reprints are available on request. Full list also on <a href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>.</p>
+    <div class="axis"></div>
+    <div id="pubs"></div>
+  </div>
+</section>
+
+<!-- ============ CV ============ -->
+<section class="panel" id="cv" aria-labelledby="cv-h">
+  <div class="wrap">
+    <p class="eyebrow" id="cv-h">Curriculum vitae</p>
+    <div class="stages" id="stages"></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="panel" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2 id="contact-h">Get in touch</h2>
+    <div class="axis"></div>
+    <div class="contact-grid">
+      <dl class="dl">
+        <dt>Email</dt>
+        <dd><a href="mailto:eschuppe@cmc.edu">eschuppe@cmc.edu</a></dd>
+        <dt>Office</dt>
+        <dd>Robert Day Science Center, Room 229</dd>
+        <dt>Department</dt>
+        <dd>Kravis Department of Integrated Sciences<br>Claremont McKenna College<br>Claremont, California</dd>
+        <dt>Elsewhere</dt>
+        <dd><a href="https://bsky.app/profile/ericschuppe.bsky.social" target="_blank" rel="noopener">Bluesky</a></dd>
+      </dl>
+      <div class="prose">
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Eric R. Schuppe</span>
+    <span>Claremont McKenna College</span>
+    <a href="mailto:eschuppe@cmc.edu">eschuppe@cmc.edu</a>
+  </div>
+</footer>
+
+<script>
+/* =========================================================================
+   1. CONTENT. Everything you will want to edit lives in this block.
+   ========================================================================= */
+
+/* NEWS
+   Newest first. Five show at a time and the arrows page through the rest.
+   Optional: add  link: { label: "Read the paper", href: "https://..." }
+
+   !! Only the first two entries are real. Everything below them is invented
+   !! placeholder text so you can see how the paging looks. Replace or delete. */
+const NEWS = [
+  { date: "July 2026",
+    text: "The Java finch colony at the Robert Day Science Center is coming online, with behavioral recording rigs to follow." },
+
+  { date: "June 2026",
+    text: "New paper out in Proceedings of the Royal Society B on repeated evolutionary turnover of vertebrate skeletal muscle myosins, with Chad Harvey and the Pease and Fuxjager labs.",
+    link: { label: "Read the paper", href: "https://scholar.google.com/citations?user=VzP548QAAAAJ" } },
+
+  { date: "May 2026",
+    text: "Placeholder. Two lab members presented posters at the Claremont Colleges undergraduate research symposium." },
+
+  { date: "April 2026",
+    text: "Placeholder. The CDFW research permit for the new finch facility cleared its final inspection." },
+
+  { date: "March 2026",
+    text: "Placeholder. The lab is recruiting CMC and Claremont Colleges undergraduates for the coming academic year. Projects available in birdsong behavior, genomics, and analysis code." },
+
+  { date: "February 2026",
+    text: "Placeholder. Departmental seminar on the neurogenetics of individual differences in vocal behavior." },
+
+  { date: "January 2026",
+    text: "Placeholder. Talk at the annual meeting of the Society for Integrative and Comparative Biology." },
+
+  { date: "December 2025",
+    text: "Placeholder. Spatial transcriptomics dataset completed across HVC, RA, AId, and dNCL." },
+
+  { date: "November 2025",
+    text: "Placeholder. The first cohort of undergraduate researchers joined the lab." },
+
+  { date: "October 2025",
+    text: "Placeholder. Acoustic recording array and multi-camera tracking rigs installed and calibrated." },
+
+  { date: "September 2025",
+    text: "Placeholder. The lab opened in the Kravis Department of Integrated Sciences at Claremont McKenna College." },
+
+  { date: "August 2025",
+    text: "Placeholder. Preprint posted on gene co-expression networks underlying call rate in Bengalese finches." }
+];
+
+const THREADS = [
+  {
+    tag: "Thread 01",
+    title: "Why individuals differ",
+    system: "Bengalese finches",
+    text: "Finches of the same species, even siblings, differ reliably in the production and precision of their vocalizations. In most cases these individual differences are stable across an animal’s lifetime. One of our main goals is to identify the sources of that variation, including how these behavioral differences are shaped by the interplay between an animal’s genetic background and its social learning. We use RNA sequencing, co-expression networks, and variant association across our colony to find the molecular differences that track those behavioral phenotypes. We then test the strongest candidates by manipulating their expression directly in the brain regions that control song."
+  },
+  {
+    tag: "Thread 02",
+    title: "Species differences in social communication",
+    system: "Comparative work across finches",
+    text: "Courtship displays can vary dramatically even among closely related species. We want to know what changes in the brain as those displays grow more elaborate. By comparing species with different social systems and vocal repertoires, we can pick out the shifts in gene expression and neural wiring that accompany richer signaling."
+  }
+];
+
+const METHODS = [
+  "Bulk and spatial transcriptomics (Visium) in identified brain regions",
+  "Gene co-expression networks and cell-type deconvolution",
+  "Population genomics, variant calling, and gene-level association",
+  "Targeted pharmacology in song control nuclei",
+  "Markerless pose tracking and automated acoustic analysis",
+  "Comparative neuroanatomy and cross-species transcriptomics"
+];
+
+/* PEOPLE
+   Currently rendered as a plain list of names and roles.
+   The photo and bio fields below are kept but not displayed, so portraits can
+   be switched back on later by editing renderPeople() alone. */
+const PEOPLE = [
+  {
+    name: "Eric R. Schuppe",
+    role: "Principal investigator",
+    photo: "images/people/eric.jpg",
+    bio: "Assistant professor of neuroscience. Previously a postdoctoral fellow at UCSF and Cornell.",
+    link: { label: "Email", href: "mailto:eschuppe@cmc.edu" }
+  },
+  { name: "Benji Ooi",       role: "Undergraduate researcher", photo: "", bio: "", link: null },
+  { name: "Lielle Goland",   role: "Undergraduate researcher", photo: "", bio: "", link: null },
+  { name: "Carmela Labarda", role: "Undergraduate researcher", photo: "", bio: "", link: null },
+  { name: "Reese Gutierrez", role: "Undergraduate researcher", photo: "", bio: "", link: null },
+  { name: "Weitao Ke",       role: "Undergraduate researcher", photo: "", bio: "", link: null }
+];
+
+/* CV
+   Each block is a section. A section holds either `entries` directly,
+   or `groups` when it needs subheadings (as Education does). */
+const CV = [
+  {
+    section: "Current position",
+    entries: [
+      { when: "2026\u2013present", role: "Assistant Professor",
+        place: "Kravis Department of Integrated Sciences, Claremont McKenna College" }
+    ]
+  },
+  {
+    section: "Education",
+    groups: [
+      {
+        label: "Graduate",
+        entries: [
+          { when: "2015\u2013August 2019", role: "Ph.D. in Biology",
+            place: "Wake Forest University, Winston-Salem, NC",
+            advisor: "Dr. Matthew Fuxjager" },
+          { when: "2013\u20132014", role: "M.S. in Biology",
+            place: "Georgia State University, Atlanta, GA",
+            advisor: "Dr. Matthew Grober" }
+        ]
+      },
+      {
+        label: "Undergraduate",
+        entries: [
+          { when: "2009\u20132013", role: "B.A. in Neuroscience (Honors)",
+            place: "Austin College, Sherman, TX" }
+        ]
+      }
+    ]
+  },
+  {
+    section: "Other training",
+    entries: [
+      { when: "2022\u20132026", role: "HHMI LSRF post-doctoral associate",
+        place: "University of California, San Francisco, CA",
+        advisor: "Michael S. Brainard" },
+      { when: "2019\u20132022", role: "Post-doctoral associate",
+        place: "Cornell University, Ithaca, NY, Department of Neurobiology and Behavior",
+        advisor: "Andrew H. Bass" },
+      { when: "2016\u20132017", role: "Visiting scientist",
+        place: "Duke University, Durham, NC, Department of Neurobiology",
+        advisor: "Erich D. Jarvis" }
+    ]
+  }
+];
+
+const PUBS = [
+  { y:2026, c:"Fuxjager, M. J., &amp; <b>Schuppe, E. R.</b> (in press). Evolution of social behavior and its neurobiological basis&mdash;where we began, and where we&rsquo;re going. <i>Current Opinion in Neurobiology</i>." },
+  { y:2026, c:"Harvey, C. M., <b>Schuppe, E. R.</b>, Brainard, M. A., Fuxjager, M. J., &amp; Pease, J. B. Repeated evolutionary turnover of vertebrate skeletal muscle myosins. <i>Proceedings of the Royal Society B</i>, 293(2070), 20260254." },
+  { y:2024, c:"<b>Schuppe, E. R.</b>, Ballagh, I., Akbari, N., Fang, W., Perelmuter, J. T., Radtke, C. H., Marchaterre, M. A., &amp; Bass, A. H. Midbrain node for context-specific vocalisation in fish. <i>Nature Communications</i>, 15(1), 189." },
+  { y:2022, c:"Anderson, N. K., Goodwin, S. E., <b>Schuppe, E. R.</b>, Dawn, A., Preininger, D., Mangiamele, L. A., &amp; Fuxjager, M. J. Activational vs. organizational effects of sex steroids and their role in the evolution of reproductive behavior: looking to foot flagging frogs and beyond. <i>Hormones and Behavior</i>." },
+  { y:2022, c:"Tatarsky, R. L., Guo, Z., Campbell, S. C., Kim, K., Fang, W., Perelmuter, J. T., <b>Schuppe, E. R.</b>, Conway, K. W., Reeve, H. R., &amp; Bass, A. H. Acoustic and postural displays in a miniature and transparent teleost fish, Danionella dracula. <i>Journal of Experimental Biology</i>, 225(16)." },
+  { y:2022, c:"<b>Schuppe, E. R.</b>, Cantin, L., Chakraborty, M., Biegler, M. T., Jarvis, E. R., Chen, C.-C., Hara, E., Bertelsen, M. F., Witt, C. C., Jarvis, E. D., &amp; Fuxjager, M. J. Forebrain nuclei linked to woodpecker territorial drum displays mirror those that enable vocal learning in songbirds. <i>PLOS Biology</i>." },
+  { y:2022, c:"<b>Schuppe, E. R.</b>, Tobiansky, D., Goller, F., &amp; Fuxjager, M. J. Specialized androgen synthesis in skeletal muscles that actuate elaborate sexual displays. <i>Journal of Experimental Biology</i>." },
+  { y:2022, c:"Pease, J. B., Driver, R. J., de la Cerda, D. A., Day, L. B., Lindsay, W. R., Schlinger, B. A., <b>Schuppe, E. R.</b>, Balakrishnan, C. N., &amp; Fuxjager, M. J. Layered evolution of gene expression in &ldquo;superfast&rdquo; muscles for courtship. <i>Proceedings of the National Academy of Sciences USA</i>, 119, e2119671119." },
+  { y:2022, c:"<b>Schuppe, E. R.</b>, Zhang, M. D., Perelmuter, J. T., Marchaterre, M. A., &amp; Bass, A. H. Oxytocin-like receptor expression in evolutionarily conserved nodes of a vocal network associated with male courtship in a teleost fish. <i>Journal of Comparative Neurology</i>." },
+  { y:2021, c:"Anderson, N. K., <b>Schuppe, E. R.</b>, Gururaja, K. V., Mangiamele, L. A., Martinez, J. C. C., Priti, H., &hellip; Fuxjager, M. J. A common endocrine signature marks the convergent evolution of an elaborate dance display in frogs. <i>The American Naturalist</i>, 198(4)." },
+  { y:2021, c:"<b>Schuppe, E. R.</b>, Rutter, A. R., Roberts, T. J., &amp; Fuxjager, M. J. Evolutionary and biomechanical basis of drumming behavior in woodpeckers. <i>Frontiers in Ecology and Evolution</i>, 478." },
+  { y:2020, c:"Miles, M. C., <b>Schuppe, E. R.</b>, &amp; Fuxjager, M. J. Selection for rhythm as a trigger for recursive evolution in the elaborate display system of woodpeckers. <i>The American Naturalist</i>." },
+  { y:2020, c:"<b>Schuppe, E. R.</b>, Miles, M. C., &amp; Fuxjager, M. J. Evolution of the androgen receptor: perspectives from human health to dancing birds. <i>Molecular and Cellular Endocrinology</i>." },
+  { y:2019, c:"<b>Schuppe, E. R.</b>, Petersen, J. O., &amp; Fuxjager, M. J. Phenotypic variation reveals sites of evolutionary constraint in the androgenic signaling pathway. <i>Hormones and Behavior</i>." },
+  { y:2018, c:"Fuxjager, M. J., &amp; <b>Schuppe, E. R.</b> Androgenic signaling systems and their role in behavioral evolution. <i>Journal of Steroid Biochemistry and Molecular Biology</i>, 184, 47&ndash;56." },
+  { y:2018, c:"<b>Schuppe, E. R.</b>, Petersen, J. O., &amp; Fuxjager, M. J. Woodpecker drumming behavior is linked to specialized calcium handling properties in the neck musculature. <i>Journal of Experimental Biology</i>, 221, jeb180190." },
+  { y:2018, c:"Miles, M. C., <b>Schuppe, E. R.</b>, Ligon, R., &amp; Fuxjager, M. J. Macroevolutionary patterning of woodpecker drums reveals how sexual selection elaborates signals under constraint. <i>Proceedings of the Royal Society B</i>, 285, 20172628." },
+  { y:2018, c:"<b>Schuppe, E. R.</b>, &amp; Fuxjager, M. J. High-speed displays encoding motor skill trigger elevated territorial aggression in downy woodpeckers. <i>Functional Ecology</i>, 32, 450&ndash;460." },
+  { y:2017, c:"<b>Schuppe, E. R.</b>, Pradhan, D. S., Drilling, C., Thonkulpitak, K., &amp; Grober, M. S. Sex differences in neuromuscular androgen receptor expression and sociosexual behavior in a sex changing fish. <i>PLoS One</i>, 12, e0177711." },
+  { y:2016, c:"<b>Schuppe, E. R.</b>, Solomon-Lane, T. K., Pradhan, D. S., Thonkulpitak, K., &amp; Grober, M. S. Ancestral androgenic differentiation pathways are repurposed during the evolution of adult sexual plasticity. <i>Evolution and Development</i>, 18, 285&ndash;296." },
+  { y:2016, c:"Fuxjager, M. J., <b>Schuppe, E. R.</b>, Hoang, J., Chew, J., Shah, M., &amp; Schlinger, B. A. Expression of 5&alpha;- and 5&beta;-reductase in spinal cord and muscle of birds with different courtship repertoires. <i>Frontiers in Zoology</i>, 13, 25." },
+  { y:2016, c:"Mangiamele, L., Fuxjager, M. J., <b>Schuppe, E. R.</b>, Taylor, R., H&ouml;dl, W., &amp; Preininger, D. Increased androgenic sensitivity in the hind limb neuromuscular system marks the evolution of a derived gestural display. <i>Proceedings of the National Academy of Sciences USA</i>, 113, 5664&ndash;5669." },
+  { y:2016, c:"<b>Schuppe, E. R.</b>, Sanin, G. D., &amp; Fuxjager, M. J. The social context of a territorial dispute differentially influences the way individuals in breeding pairs coordinate their aggressive tactics. <i>Behavioral Ecology and Sociobiology</i>, 70, 673&ndash;682." }
+];
+
+
+/* =========================================================================
+   2. RENDER
+   ========================================================================= */
+
+const $ = (sel, root) => (root || document).querySelector(sel);
+
+function esc(s){
+  return String(s).replace(/[&<>"]/g, ch => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[ch]));
+}
+
+
+/* Five entries per page, arrows step through the rest. Change PER_PAGE to taste. */
+const NEWS_PER_PAGE = 5;
+let newsPage = 0;
+
+function renderNews(){
+  const total = NEWS.length;
+  const pages = Math.max(1, Math.ceil(total / NEWS_PER_PAGE));
+  newsPage = Math.max(0, Math.min(newsPage, pages - 1));
+
+  const start = newsPage * NEWS_PER_PAGE;
+  const shown = NEWS.slice(start, start + NEWS_PER_PAGE);
+
+  $("#news").innerHTML = shown.map((n, i) => {
+    const more = n.link
+      ? '<p class="news-more"><a href="' + esc(n.link.href) + '">' + esc(n.link.label) + '</a></p>'
+      : '';
+    return '<li class="news-item" style="animation-delay:' + (i * 0.045).toFixed(3) + 's">' +
+             '<p class="news-date">' + esc(n.date) + '</p>' +
+             '<div><p class="news-text">' + esc(n.text) + '</p>' + more + '</div>' +
+           '</li>';
+  }).join("");
+
+  const prev = $("#news-prev"), next = $("#news-next"), range = $("#news-range");
+  if (range) range.textContent = total
+    ? (start + 1) + "\u2013" + Math.min(start + NEWS_PER_PAGE, total) + " of " + total
+    : "";
+  if (prev) prev.disabled = newsPage === 0;
+  if (next) next.disabled = newsPage >= pages - 1;
+  // Hide the whole control when everything fits on one page.
+  const nav = document.querySelector(".news-nav");
+  if (nav) nav.style.display = pages > 1 ? "" : "none";
+}
+
+function stepNews(delta){
+  newsPage += delta;
+  renderNews();
+}
+
+function renderThreads(){
+  $("#threads").innerHTML = THREADS.map(t =>
+    '<article class="thread"><div>' +
+      '<p class="tag">' + esc(t.tag) + '</p>' +
+      '<h3>' + esc(t.title) + '</h3>' +
+      '<p class="system">' + esc(t.system) + '</p>' +
+    '</div><p>' + esc(t.text) + '</p></article>'
+  ).join("");
+}
+
+function renderMethods(){
+  $("#methods").innerHTML = METHODS.map(m => '<li>' + esc(m) + '</li>').join("");
+}
+
+/* Names only for now. The photo and bio fields are still in PEOPLE and are
+   simply not rendered, so restoring portraits later is a change to this
+   function alone. */
+function renderPeople(){
+  $("#roster").innerHTML = PEOPLE.map(p => {
+    const name = p.link
+      ? '<a href="' + esc(p.link.href) + '">' + esc(p.name) + '</a>'
+      : esc(p.name);
+    return '<li class="person">' +
+             '<p class="person-name">' + name + '</p>' +
+             '<p class="person-role">' + esc(p.role) + '</p>' +
+           '</li>';
+  }).join("");
+}
+
+function cvEntry(e){
+  const advisor = e.advisor
+    ? '<span class="advisor">Advisor: <i>' + esc(e.advisor) + '</i></span>'
+    : '';
+  return '<div class="stage"><p class="when">' + esc(e.when) + '</p>' +
+         '<p><b>' + esc(e.role) + '</b><span>' + esc(e.place) + '</span>' +
+         advisor + '</p></div>';
+}
+
+function renderStages(){
+  $("#stages").innerHTML = CV.map(block => {
+    let body = "";
+    if (block.groups) {
+      body = block.groups.map(g =>
+        '<p class="cv-group">' + esc(g.label) + '</p>' +
+        g.entries.map(cvEntry).join("")
+      ).join("");
+    } else {
+      body = block.entries.map(cvEntry).join("");
+    }
+    return '<section class="cv-section"><h3>' + esc(block.section) + '</h3>' + body + '</section>';
+  }).join("");
+}
+
+function renderPubs(){
+  const years = [...new Set(PUBS.map(p => p.y))].sort((a,b) => b - a);
+  $("#pubs").innerHTML = years.map(y => {
+    const items = PUBS.filter(p => p.y === y).map(p => '<li class="pub">' + p.c + '</li>').join("");
+    return '<div class="year-group"><p class="year">' + y + '</p><ol class="pub-list">' + items + '</ol></div>';
+  }).join("");
+}
+
+/* ---- Panel C: co-expression heatmap, drawn once ---- */
+function renderHeatmap(){
+  const cells = document.getElementById("heatcells");
+  const frame = document.getElementById("heatframe");
+  if (!cells) return;
+
+  const COLS = 13, ROWS = 8, W = 19, H = 17, X0 = 40, Y0 = 34;
+  const SCALE = ["#DCEDF8","#B9DDF1","#8CCBEA","#5FB6E0","#2E9BD6","#12628F"];
+  const HUB_ROW = 3;
+
+  // deterministic pseudo-random so the figure looks the same every load
+  let seed = 20260721;
+  const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+
+  // each bird gets a module score, each gene a loading on it. A couple of genes load negatively.
+  const birds = Array.from({length: COLS}, (_, c) => (c / (COLS - 1)) * 1.5 - 0.6 + (rnd() * .3 - .15));
+  const genes = Array.from({length: ROWS}, (_, r) => (r === 1 || r === 6) ? -(0.5 + rnd() * .4) : (0.6 + rnd() * 0.6));
+
+  let svg = "";
+  for (let r = 0; r < ROWS; r++){
+    for (let c = 0; c < COLS; c++){
+      const v = birds[c] * genes[r] + (rnd() * .45 - .225) + .5;
+      const idx = Math.max(0, Math.min(SCALE.length - 1, Math.round(v * (SCALE.length - 1))));
+      const delay = (0.35 + (c * 0.022) + (r * 0.012)).toFixed(3);
+      svg += '<rect class="cell" x="' + (X0 + c * W) + '" y="' + (Y0 + r * H) + '" ' +
+             'width="' + (W - 1) + '" height="' + (H - 1) + '" fill="' + SCALE[idx] + '" ' +
+             'style="animation-delay:' + delay + 's"/>';
+    }
+  }
+  cells.innerHTML = svg;
+
+  // highlight the hub gene row
+  frame.innerHTML =
+    '<rect class="hub-box" x="' + (X0 - 4) + '" y="' + (Y0 + HUB_ROW * H - 3) + '" ' +
+    'width="' + (COLS * W + 7) + '" height="' + (H + 4) + '" rx="2"/>' +
+    '<text class="axis-label" x="' + (X0 + COLS * W + 8) + '" y="' + (Y0 + HUB_ROW * H + 12) + '" fill="#1E9AD6">hub</text>';
+}
+
+
+/* =========================================================================
+   3. TAB ROUTING (hash based, so it works on GitHub Pages with no server)
+   ========================================================================= */
+
+const ROUTES = ["home","research","people","publications","cv","contact"];
+
+function show(route){
+  const id = ROUTES.includes(route) ? route : "home";
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("is-active", p.id === id));
+  document.querySelectorAll("nav a").forEach(a => {
+    const target = (a.getAttribute("href") || "").replace("#/", "") || "home";
+    if (target === id) a.setAttribute("aria-current","page");
+    else a.removeAttribute("aria-current");
+  });
+  const titles = {
+    home:"Eric R. Schuppe", research:"Research", people:"People",
+    publications:"Publications", cv:"CV", contact:"Contact"
+  };
+  document.title = (id === "home" ? "" : titles[id] + " — ") + "Eric R. Schuppe";
+}
+
+function routeFromHash(){
+  return (location.hash || "#/").replace(/^#\/?/, "") || "home";
+}
+
+window.addEventListener("hashchange", () => {
+  // Only hashes of the form #/route drive the tabs. Anything else (like #main) is ignored.
+  if (!/^#\//.test(location.hash) && location.hash !== "") return;
+  show(routeFromHash());
+  window.scrollTo({ top: 0, behavior: "auto" });
+});
+
+
+/* =========================================================================
+   4. BOOT
+   ========================================================================= */
+renderNews();
+$("#news-prev").addEventListener("click", () => stepNews(-1));
+$("#news-next").addEventListener("click", () => stepNews(1));
+renderThreads();
+renderMethods();
+renderPeople();
+renderStages();
+renderPubs();
+renderHeatmap();
+show(routeFromHash());
+$("#year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
